@@ -12,7 +12,7 @@ public enum ExceptionType {
         this.message = MESSAGE_PREFIX + message;
     }
 
-    public void throwException() {
-        throw new IllegalArgumentException(message);
+    public String getMessage() {
+        return message;
     }
 }
