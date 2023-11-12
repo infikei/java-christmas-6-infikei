@@ -9,7 +9,7 @@ public class TypeConverter {
         return Integer.parseInt(number);
     }
 
-    public static List<String> split(String values, char separator) {
+    public static List<String> splitExactly(String values, char separator) {
         if (values.isEmpty()) {
             throw new IllegalArgumentException();
         }
