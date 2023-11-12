@@ -4,7 +4,7 @@ import christmas.constant.ExceptionType;
 import christmas.constant.Menu;
 
 public class Order {
-    private static final int MINIMUM_COUNT = 1;
+    private static final int COUNT_MINIMUM = 1;
 
     private final Menu menu;
     private final int count;
@@ -24,13 +24,13 @@ public class Order {
     }
 
     private void validateCount(int count) {
-        if (!isInRange(count)) {
+        if (!isCountInRange(count)) {
             throw new IllegalArgumentException(ExceptionType.INVALID_ORDERS.getMessage());
         }
     }
 
-    private boolean isInRange(int count) {
-        return count >= MINIMUM_COUNT;
+    private boolean isCountInRange(int count) {
+        return count >= COUNT_MINIMUM;
     }
 
     public Menu getMenu() {

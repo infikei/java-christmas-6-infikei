@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Orders {
-    private static final int MAXIMUM_COUNT_SUM = 20;
+    private static final int COUNT_SUM_MAXIMUM = 20;
 
     private final List<Order> orders;
 
@@ -36,7 +36,7 @@ public class Orders {
     }
 
     private boolean isMenuCountSumInRange(List<Order> orders) {
-        return getMenuCountSum(orders) <= MAXIMUM_COUNT_SUM;
+        return getMenuCountSum(orders) <= COUNT_SUM_MAXIMUM;
     }
 
     private int getMenuCountSum(List<Order> orders) {
