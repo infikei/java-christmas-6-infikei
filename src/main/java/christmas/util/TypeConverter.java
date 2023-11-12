@@ -16,7 +16,6 @@ public class TypeConverter {
         if (values.charAt(values.length() - 1) == separator) {
             throw new IllegalArgumentException();
         }
-
         return new ArrayList<>(Arrays.asList(values.split(String.valueOf(separator))));
     }
 }
