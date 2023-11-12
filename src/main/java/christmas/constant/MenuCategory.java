@@ -15,4 +15,13 @@ public enum MenuCategory {
     public String getName() {
         return name;
     }
+
+    public static MenuCategory nameOf(String name) {
+        for (MenuCategory category : MenuCategory.values()) {
+            if (category.getName().equals(name)) {
+                return category;
+            }
+        }
+        return null;
+    }
 }
