@@ -32,7 +32,16 @@ public enum Menu {
         return price;
     }
 
-    public String getCategoryName() {
-        return this.category.getName();
+    public MenuCategory getCategory() {
+        return this.category;
+    }
+
+    public static Menu nameOf(String name) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getName().equals(name)) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 }

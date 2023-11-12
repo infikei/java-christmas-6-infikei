@@ -22,6 +22,6 @@ public enum MenuCategory {
                 return category;
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 }
