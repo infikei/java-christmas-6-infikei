@@ -46,4 +46,8 @@ public class Order {
     public int getCount() {
         return count;
     }
+
+    public int getPriceSum() {
+        return menu.getPrice() * count;
+    }
 }

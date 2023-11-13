@@ -60,4 +60,13 @@ public class Orders {
     public List<Order> getOrders() {
         return orders;
     }
+
+    public int getPriceSum() {
+        int priceSum = 0;
+
+        for (Order order : orders) {
+            priceSum += order.getPriceSum();
+        }
+        return priceSum;
+    }
 }
