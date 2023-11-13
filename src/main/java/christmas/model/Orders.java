@@ -69,4 +69,11 @@ public class Orders {
         }
         return priceSum;
     }
+
+    public int getMenuCountSumOfCategory(MenuCategory category) {
+        return orders.stream()
+                .filter(order -> order.equalsCategory(category))
+                .mapToInt(Order::getCount)
+                .sum();
+    }
 }

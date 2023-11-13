@@ -2,6 +2,7 @@ package christmas.model;
 
 import christmas.constant.ExceptionType;
 import christmas.constant.Menu;
+import christmas.constant.MenuCategory;
 
 public class Order {
     private static final int COUNT_MINIMUM = 1;
@@ -49,5 +50,9 @@ public class Order {
 
     public int getPriceSum() {
         return menu.getPrice() * count;
+    }
+
+    public boolean equalsCategory(MenuCategory category) {
+        return menu.getCategory() == category;
     }
 }
