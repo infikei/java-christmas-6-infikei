@@ -51,8 +51,4 @@ public class Order {
     public int getPriceSum() {
         return menu.getPrice() * count;
     }
-
-    public boolean equalsCategory(MenuCategory category) {
-        return menu.getCategory() == category;
-    }
 }
