@@ -3,6 +3,8 @@ package christmas.service;
 import christmas.constant.Badge;
 import christmas.constant.Event;
 import christmas.model.Date;
+import christmas.model.EventsGenerator;
+import christmas.model.GiftsGenerator;
 import christmas.model.Order;
 import christmas.model.Orders;
 
@@ -22,5 +24,18 @@ public class PlannerService {
 
     public void saveOrders(Orders orders) {
         this.orders = orders;
+    }
+
+    public void generatePlannerResult() {
+        generateGifts();
+        generateEvents();
+    }
+
+    private void generateGifts() {
+        gifts = new GiftsGenerator(orders).getGifts();
+    }
+
+    private void generateEvents() {
+        events = new EventsGenerator(date, orders, gifts).getEvents();
     }
 }
