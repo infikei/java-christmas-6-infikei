@@ -17,8 +17,8 @@ public enum MenuCategory {
     }
 
     public static MenuCategory nameOf(String name) {
-        for (MenuCategory category : MenuCategory.values()) {
-            if (category.getName().equals(name)) {
+        for (MenuCategory category : values()) {
+            if (category.name.equals(name)) {
                 return category;
             }
         }
