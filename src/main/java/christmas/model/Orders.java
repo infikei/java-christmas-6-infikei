@@ -13,11 +13,11 @@ public class Orders {
     private final List<Order> orders;
 
     public Orders(Map<String, Integer> orders) {
-        this.orders = convert(orders);
-        validate(this.orders);
+        this.orders = convertOrders(orders);
+        validateOrders();
     }
 
-    private List<Order> convert(Map<String, Integer> orders) {
+    private List<Order> convertOrders(Map<String, Integer> orders) {
         List<Order> ordersConverted = new ArrayList<>();
 
         for (String menuName : orders.keySet()) {
@@ -26,29 +26,28 @@ public class Orders {
         return ordersConverted;
     }
 
-    private void validate(List<Order> orders) {
-        if (!isMenuCountSumInRange(orders)) {
+    private void validateOrders() {
+        validateIsMenuCountSumInRange();
+        validateHasMenuExceptDrink();
+    }
+
+    private void validateIsMenuCountSumInRange() {
+        if (!isMenuCountSumInRange()) {
             throw new IllegalArgumentException(ExceptionType.INVALID_ORDERS.getMessage());
         }
-        if (!hasMenuExceptDrink(orders)) {
+    }
+
+    private boolean isMenuCountSumInRange() {
+        return getCountSum() <= COUNT_SUM_MAXIMUM;
+    }
+
+    private void validateHasMenuExceptDrink() {
+        if (!hasMenuExceptDrink()) {
             throw new IllegalArgumentException(ExceptionType.INVALID_ORDERS.getMessage());
         }
     }
 
-    private boolean isMenuCountSumInRange(List<Order> orders) {
-        return getMenuCountSum(orders) <= COUNT_SUM_MAXIMUM;
-    }
-
-    private int getMenuCountSum(List<Order> orders) {
-        int menuCountSum = 0;
-
-        for (Order order : orders) {
-            menuCountSum += order.getCount();
-        }
-        return menuCountSum;
-    }
-
-    private boolean hasMenuExceptDrink(List<Order> orders) {
+    private boolean hasMenuExceptDrink() {
         for (Order order : orders) {
             if (order.getMenu().getCategory() != MenuCategory.DRINK) {
                 return true;
@@ -62,17 +61,20 @@ public class Orders {
     }
 
     public int getPriceSum() {
-        int priceSum = 0;
-
-        for (Order order : orders) {
-            priceSum += order.getPriceSum();
-        }
-        return priceSum;
+        return orders.stream()
+                .mapToInt(Order::getPriceSum)
+                .sum();
     }
 
-    public int getMenuCountSumOfCategory(MenuCategory category) {
+    public int getCountSum() {
         return orders.stream()
-                .filter(order -> order.equalsCategory(category))
+                .mapToInt(Order::getCount)
+                .sum();
+    }
+
+    public int getCountSumOfCategory(MenuCategory category) {
+        return orders.stream()
+                .filter(order -> order.getMenu().getCategory() == category)
                 .mapToInt(Order::getCount)
                 .sum();
     }
