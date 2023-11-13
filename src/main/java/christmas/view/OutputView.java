@@ -11,4 +11,8 @@ public class OutputView {
     public void printPlannerResultStart(int date) {
         System.out.println(String.format(PRINT_RESULT_START_FORMAT, date));
     }
+
+    public void printExceptionMessage(String message) {
+        System.out.println(message);
+    }
 }
