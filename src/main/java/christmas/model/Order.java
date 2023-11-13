@@ -9,8 +9,14 @@ public class Order {
     private final Menu menu;
     private final int count;
 
-    public Order(String menuName, int count) {
-        this.menu = convertMenu(menuName);
+    public Order(String name, int count) {
+        this.menu = convertMenu(name);
+        validateCount(count);
+        this.count = count;
+    }
+
+    public Order(Menu menu, int count) {
+        this.menu = menu;
         validateCount(count);
         this.count = count;
     }
