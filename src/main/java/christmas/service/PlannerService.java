@@ -29,6 +29,7 @@ public class PlannerService {
     public void generatePlannerResult() {
         generateGifts();
         generateEvents();
+        generateBadge();
     }
 
     private void generateGifts() {
@@ -37,5 +38,12 @@ public class PlannerService {
 
     private void generateEvents() {
         events = new EventsGenerator(date, orders, gifts).getEvents();
+    }
+
+    private void generateBadge() {
+        int salePriceSum = events.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        badge = Badge.getBadgeByPrice(salePriceSum);
     }
 }
