@@ -50,7 +50,7 @@ public class PlannerController {
     }
 
     private void generatePlannerResult() {
-        //
+        plannerService.generatePlannerResult();
     }
 
     private void printPlannerResult() {
