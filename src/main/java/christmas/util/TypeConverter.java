@@ -12,13 +12,21 @@ public class TypeConverter {
     }
 
     public static List<String> splitExactly(String values, char separator) {
+        validateIsNotEmpty(values);
+        validateIsNotLastCharacterSeparator(values, separator);
+        return new ArrayList<>(Arrays.asList(values.split(String.valueOf(separator))));
+    }
+
+    private static void validateIsNotEmpty(String values) {
         if (values.isEmpty()) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private static void validateIsNotLastCharacterSeparator(String values, char separator) {
         if (values.charAt(values.length() - 1) == separator) {
             throw new IllegalArgumentException();
         }
-        return new ArrayList<>(Arrays.asList(values.split(String.valueOf(separator))));
     }
 
     public static List<List<String>> splitExactlyTwice(String values, char separator, char innerSeparator) {
@@ -54,28 +62,19 @@ public class TypeConverter {
             validateIsSizeTwo(pair);
             pairsConverted.put(pair.get(0), pair.get(1));
         }
-
         validateIsSizeSame(pairs, pairsConverted);
         return pairsConverted;
     }
 
     private static void validateIsSizeTwo(List<String> values) {
-        if (!isSizeTwo(values)) {
+        if (values.size() != 2) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private static boolean isSizeTwo(List<String> values) {
-        return values.size() == 2;
     }
 
     private static void validateIsSizeSame(List<List<String>> value, Map<String, String> other) {
-        if (!isSizeSame(value, other)) {
+        if (value.size() != other.size()) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private static boolean isSizeSame(List<List<String>> value, Map<String, String> other) {
-        return value.size() == other.size();
     }
 }
