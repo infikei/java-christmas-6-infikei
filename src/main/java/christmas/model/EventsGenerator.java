@@ -22,7 +22,7 @@ public class EventsGenerator {
 
     private final Map<Event, Integer> events;
 
-    public EventsGenerator(Date date, Orders orders, List<Order> gifts) {
+    public EventsGenerator(Date date, Orders orders, Gifts gifts) {
         events = new HashMap<>();
 
         if (orders.getPriceSum() >= MINIMUM_PRICE_SUM_FOR_EVENT) {
@@ -91,16 +91,12 @@ public class EventsGenerator {
         return filterCount != 0L;
     }
 
-    private void addGiftEvent(List<Order> gifts) {
-        if (!gifts.isEmpty()) {
-            addEvent(Event.GIFT, getGiftsPriceSum(gifts));
-        }
-    }
+    private void addGiftEvent(Gifts gifts) {
+        int giftsPriceSum = gifts.getPriceSum();
 
-    private int getGiftsPriceSum(List<Order> gifts) {
-        return gifts.stream()
-                .mapToInt(Order::getPriceSum)
-                .sum();
+        if (giftsPriceSum != 0) {
+            addEvent(Event.GIFT, giftsPriceSum);
+        }
     }
 
     private void addEvent(Event event, int salePrice) {

@@ -2,31 +2,28 @@ package christmas.model;
 
 import christmas.constant.Menu;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GiftsGenerator {
-    private static final int MINIMUM_PRICE_FOR_CHAMPAGNE_GIFT = 120_000;
-    private static final int CHAMPAGNE_GIFT_ADD_COUNT = 1;
+    private static final int MINIMUM_PRICE_SUM_FOR_EVENT = 10_000;
+    private static final int MINIMUM_PRICE_SUM_FOR_CHAMPAGNE = 120_000;
+    private static final int CHAMPAGNE_ADD_COUNT = 1;
 
-    private final List<Order> gifts;
+    private final Gifts gifts;
 
     public GiftsGenerator(Orders orders) {
-        gifts = new ArrayList<>();
-        addChampagneGift(orders);
-    }
+        gifts = new Gifts();
 
-    private void addChampagneGift(Orders orders) {
-        if (orders.getPriceSum() >= MINIMUM_PRICE_FOR_CHAMPAGNE_GIFT) {
-            addGift(Menu.CHAMPAGNE, CHAMPAGNE_GIFT_ADD_COUNT);
+        if (orders.getPriceSum() >= MINIMUM_PRICE_SUM_FOR_EVENT) {
+            addChampagneGift(orders);
         }
     }
 
-    private void addGift(Menu menu, int count) {
-        gifts.add(new Order(menu, count));
+    private void addChampagneGift(Orders orders) {
+        if (orders.getPriceSum() >= MINIMUM_PRICE_SUM_FOR_CHAMPAGNE) {
+            gifts.add(Menu.CHAMPAGNE, CHAMPAGNE_ADD_COUNT);
+        }
     }
 
-    public List<Order> getGifts() {
+    public Gifts getGifts() {
         return gifts;
     }
 }

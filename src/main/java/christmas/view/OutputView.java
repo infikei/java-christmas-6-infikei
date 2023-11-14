@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.constant.Badge;
 import christmas.constant.Event;
+import christmas.model.Gift;
 import christmas.model.Order;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class OutputView {
         System.out.println(String.format(ORDERS_PRICE_SUM_FORMAT, ordersPriceSum));
     }
 
-    public void printGifts(List<Order> gifts) {
+    public void printGifts(List<Gift> gifts) {
         System.out.println(GIFTS_START);
 
         if (gifts.isEmpty()) {
@@ -52,7 +53,7 @@ public class OutputView {
             return;
         }
 
-        for (Order gift : gifts) {
+        for (Gift gift : gifts) {
             System.out.println(gift);
         }
     }

@@ -4,6 +4,8 @@ import christmas.constant.Badge;
 import christmas.constant.Event;
 import christmas.model.Date;
 import christmas.model.EventsGenerator;
+import christmas.model.Gift;
+import christmas.model.Gifts;
 import christmas.model.GiftsGenerator;
 import christmas.model.Order;
 import christmas.model.Orders;
@@ -14,7 +16,7 @@ import java.util.Map;
 public class PlannerService {
     private Date date;
     private Orders orders;
-    private List<Order> gifts;
+    private Gifts gifts;
     private Map<Event, Integer> events;
     private Badge badge;
 
@@ -52,8 +54,8 @@ public class PlannerService {
         return orders.getOrders();
     }
 
-    public List<Order> getGifts() {
-        return gifts;
+    public List<Gift> getGifts() {
+        return gifts.getGifts();
     }
 
     public Map<Event, Integer> getEvents() {
@@ -69,9 +71,7 @@ public class PlannerService {
     }
 
     public int getGiftsPriceSum() {
-        return gifts.stream()
-                .mapToInt(Order::getPriceSum)
-                .sum();
+        return gifts.getPriceSum();
     }
 
     public int getEventsSaleSum() {
