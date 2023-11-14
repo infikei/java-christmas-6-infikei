@@ -24,6 +24,11 @@ public enum Menu {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public String getName() {
         return name;
     }

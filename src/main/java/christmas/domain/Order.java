@@ -39,6 +39,11 @@ public class Order {
         return count >= COUNT_MINIMUM;
     }
 
+    @Override
+    public String toString() {
+        return String.format(TO_STRING_FORMAT, menu, count);
+    }
+
     public Menu getMenu() {
         return menu;
     }
@@ -49,10 +54,5 @@ public class Order {
 
     public int getPriceSum() {
         return menu.getPrice() * count;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(TO_STRING_FORMAT, menu.getName(), count);
     }
 }
