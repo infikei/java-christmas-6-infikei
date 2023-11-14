@@ -41,7 +41,7 @@ public class PlannerService {
     }
 
     private void generateBadge() {
-        badge = Badge.getBadgeByPrice(getEventsSalePriceSum());
+        badge = Badge.getBadgeBySaleSum(getEventsSaleSum());
     }
 
     public int getDate() {
@@ -74,13 +74,13 @@ public class PlannerService {
                 .sum();
     }
 
-    public int getEventsSalePriceSum() {
+    public int getEventsSaleSum() {
         return events.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
     public int getResultPriceSum() {
-        return getOrdersPriceSum() + getGiftsPriceSum() - getEventsSalePriceSum();
+        return getOrdersPriceSum() + getGiftsPriceSum() - getEventsSaleSum();
     }
 }

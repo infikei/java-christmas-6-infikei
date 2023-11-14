@@ -7,20 +7,20 @@ public enum Badge {
     NONE("없음", 0);
 
     private final String name;
-    private final int price_minimum;
+    private final int saleSumMinimum;
 
-    private Badge(String name, int price_minimum) {
+    private Badge(String name, int saleSumMinimum) {
         this.name = name;
-        this.price_minimum = price_minimum;
+        this.saleSumMinimum = saleSumMinimum;
     }
 
     public String getName() {
         return name;
     }
 
-    public static Badge getBadgeByPrice(int price) {
+    public static Badge getBadgeBySaleSum(int saleSum) {
         for (Badge badge : values()) {
-            if (price >= badge.price_minimum) {
+            if (saleSum >= badge.saleSumMinimum) {
                 return badge;
             }
         }
