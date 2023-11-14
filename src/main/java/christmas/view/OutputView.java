@@ -1,8 +1,10 @@
 package christmas.view;
 
+import christmas.constant.Event;
 import christmas.model.Order;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final String PLANNER_START = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -11,6 +13,8 @@ public class OutputView {
     private static final String ORDERS_PRICE_SUM_START = "<할인 전 총주문 금액>";
     private static final String ORDERS_PRICE_SUM_FORMAT = "%,d원";
     private static final String GIFTS_START = "<증정 메뉴>";
+    private static final String EVENTS_START = "<혜택 내역>";
+    private static final String EVENT_FORMAT = "%s: -%,d원";
     private static final String NONE = "없음";
 
     public void printPlannerStart() {
@@ -44,6 +48,19 @@ public class OutputView {
 
         for (Order gift : gifts) {
             System.out.println(gift);
+        }
+    }
+
+    public void printEvents(Map<Event, Integer> events) {
+        System.out.println(EVENTS_START);
+
+        if (events.isEmpty()) {
+            printNone();
+            return;
+        }
+
+        for (Map.Entry<Event, Integer> event : events.entrySet()) {
+            System.out.println(String.format(EVENT_FORMAT, event.getKey().getName(), event.getValue()));
         }
     }
 
