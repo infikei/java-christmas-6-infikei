@@ -10,6 +10,8 @@ public class OutputView {
     private static final String PRINT_ORDERS_START = "<주문 메뉴>";
     private static final String PRINT_ORDERS_PRICE_SUM_START = "<할인 전 총주문 금액>";
     private static final String PRINT_ORDERS_PRICE_SUM_FORMAT = "%,d원";
+    private static final String PRINT_GIFTS_START = "<증정 메뉴>";
+    private static final String PRINT_NONE = "없음";
 
     public void printPlannerStart() {
         System.out.println(PRINT_PLANNER_START);
@@ -30,6 +32,23 @@ public class OutputView {
     public void printOrdersPriceSum(int ordersPriceSum) {
         System.out.println(PRINT_ORDERS_PRICE_SUM_START);
         System.out.println(String.format(PRINT_ORDERS_PRICE_SUM_FORMAT, ordersPriceSum));
+    }
+
+    public void printGifts(List<Order> gifts) {
+        System.out.println(PRINT_GIFTS_START);
+
+        if (gifts.isEmpty()) {
+            printNone();
+            return;
+        }
+
+        for (Order gift : gifts) {
+            System.out.println(gift);
+        }
+    }
+
+    private void printNone() {
+        System.out.println(PRINT_NONE);
     }
 
     public void printExceptionMessage(String message) {
