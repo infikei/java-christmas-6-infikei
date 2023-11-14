@@ -1,4 +1,4 @@
-package christmas.model;
+package christmas.domain;
 
 import org.junit.jupiter.api.Test;
 

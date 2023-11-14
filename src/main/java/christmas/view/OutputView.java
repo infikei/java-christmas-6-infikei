@@ -2,8 +2,8 @@ package christmas.view;
 
 import christmas.constant.Badge;
 import christmas.constant.Event;
-import christmas.model.Gift;
-import christmas.model.Order;
+import christmas.domain.Gift;
+import christmas.domain.Order;
 
 import java.util.List;
 import java.util.Map;

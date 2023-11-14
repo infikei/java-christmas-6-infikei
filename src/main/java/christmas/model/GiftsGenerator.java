@@ -1,6 +1,8 @@
 package christmas.model;
 
 import christmas.constant.Menu;
+import christmas.domain.Gifts;
+import christmas.domain.Orders;
 
 public class GiftsGenerator {
     private static final int MINIMUM_PRICE_SUM_FOR_EVENT = 10_000;

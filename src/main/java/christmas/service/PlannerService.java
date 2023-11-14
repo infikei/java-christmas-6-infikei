@@ -2,13 +2,13 @@ package christmas.service;
 
 import christmas.constant.Badge;
 import christmas.constant.Event;
-import christmas.model.Date;
+import christmas.domain.Date;
+import christmas.domain.Gift;
+import christmas.domain.Gifts;
+import christmas.domain.Order;
+import christmas.domain.Orders;
 import christmas.model.EventsGenerator;
-import christmas.model.Gift;
-import christmas.model.Gifts;
 import christmas.model.GiftsGenerator;
-import christmas.model.Order;
-import christmas.model.Orders;
 
 import java.util.List;
 import java.util.Map;

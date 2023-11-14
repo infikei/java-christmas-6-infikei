@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import christmas.model.Date;
-import christmas.model.Orders;
+import christmas.domain.Date;
+import christmas.domain.Orders;
 import christmas.service.PlannerService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
