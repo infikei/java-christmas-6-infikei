@@ -15,7 +15,7 @@ public enum DayOfWeek {
         this.remainderOfDecemberDate = remainderOfDecemberDate;
     }
 
-    public static DayOfWeek dateOf(int decemberDate) {
+    public static DayOfWeek decemberDateOf(int decemberDate) {
         for (DayOfWeek dayOfWeek : values()) {
             if (dayOfWeek.remainderOfDecemberDate == decemberDate % 7) {
                 return dayOfWeek;

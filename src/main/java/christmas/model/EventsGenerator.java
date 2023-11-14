@@ -73,7 +73,7 @@ public class EventsGenerator {
 
     private boolean isHoliday(Date date) {
         for (DayOfWeek holiday : HOLIDAYS) {
-            if (DayOfWeek.dateOf(date.getDate()) == holiday) {
+            if (DayOfWeek.decemberDateOf(date.getDate()) == holiday) {
                 return true;
             }
         }
