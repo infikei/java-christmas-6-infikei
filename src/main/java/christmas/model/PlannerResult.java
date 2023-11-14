@@ -1,9 +1,7 @@
-package christmas.domain;
+package christmas.model;
 
 import christmas.constant.Badge;
 import christmas.constant.Event;
-import christmas.model.EventsGenerator;
-import christmas.model.GiftsGenerator;
 
 import java.util.List;
 import java.util.Map;

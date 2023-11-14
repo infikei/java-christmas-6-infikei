@@ -1,8 +1,6 @@
 package christmas.model;
 
 import christmas.constant.Menu;
-import christmas.domain.Gift;
-import christmas.domain.Orders;
 
 import java.util.ArrayList;
 import java.util.List;
