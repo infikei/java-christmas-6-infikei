@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EventsGenerator {
-    private static final int MINIMUM_PRICE_FOR_EVENT = 10_000;
+    private static final int MINIMUM_PRICE_SUM_FOR_EVENT = 10_000;
     private static final int CHRISTMAS_D_DAY_BEGIN = 1;
     private static final int CHRISTMAS_D_DAY_END = 25;
     private static final List<DayOfWeek> HOLIDAYS = List.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
@@ -25,7 +25,7 @@ public class EventsGenerator {
     public EventsGenerator(Date date, Orders orders, List<Order> gifts) {
         events = new HashMap<>();
 
-        if (orders.getPriceSum() >= MINIMUM_PRICE_FOR_EVENT) {
+        if (orders.getPriceSum() >= MINIMUM_PRICE_SUM_FOR_EVENT) {
             addChristmasDDayEvent(date);
             addWeekdayEvent(date, orders);
             addHolidayEvent(date, orders);
