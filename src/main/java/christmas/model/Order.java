@@ -2,7 +2,6 @@ package christmas.model;
 
 import christmas.constant.ExceptionType;
 import christmas.constant.Menu;
-import christmas.constant.MenuCategory;
 
 public class Order {
     private static final String TO_STRING_FORMAT = "%s %d개";
