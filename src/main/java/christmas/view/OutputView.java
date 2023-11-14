@@ -14,9 +14,9 @@ public class OutputView {
     private static final String ORDERS_PRICE_SUM_FORMAT = "%,d원";
     private static final String GIFTS_START = "<증정 메뉴>";
     private static final String EVENTS_START = "<혜택 내역>";
-    private static final String EVENT_FORMAT = "%s: -%,d원";
+    private static final String EVENT_FORMAT = "%s: %,d원";
     private static final String SALE_SUM_START = "<총혜택 금액>";
-    private static final String SALE_SUM_FORMAT = "-%,d원";
+    private static final String SALE_SUM_FORMAT = "%,d원";
     private static final String NONE = "없음";
 
     public void printPlannerStart() {
@@ -62,13 +62,13 @@ public class OutputView {
         }
 
         for (Map.Entry<Event, Integer> event : events.entrySet()) {
-            System.out.println(String.format(EVENT_FORMAT, event.getKey().getName(), event.getValue()));
+            System.out.println(String.format(EVENT_FORMAT, event.getKey().getName(), -1 * event.getValue()));
         }
     }
 
     public void printEventsSaleSum(int saleSum) {
         System.out.println(SALE_SUM_START);
-        System.out.println(String.format(SALE_SUM_FORMAT, saleSum));
+        System.out.println(String.format(SALE_SUM_FORMAT, -1 * saleSum));
     }
 
     private void printNone() {
