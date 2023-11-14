@@ -66,7 +66,7 @@ public class OutputView {
         }
 
         for (Map.Entry<Event, Integer> event : events.entrySet()) {
-            System.out.println(String.format(EVENT_FORMAT, event.getKey().getName(), -1 * event.getValue()));
+            System.out.println(String.format(EVENT_FORMAT, event.getKey(), -1 * event.getValue()));
         }
     }
 
