@@ -5,25 +5,28 @@ import christmas.constant.Event;
 import christmas.model.EventsGenerator;
 import christmas.model.GiftsGenerator;
 
+import java.util.List;
 import java.util.Map;
 
 public class PlannerResult {
-    private final Gifts gifts;
+    private final List<Gift> gifts;
     private final Map<Event, Integer> events;
     private final Badge badge;
 
     public PlannerResult(Date date, Orders orders) {
         this.gifts = new GiftsGenerator(orders).getGifts();
-        this.events = new EventsGenerator(date, orders, this.gifts).getEvents();
+        this.events = new EventsGenerator(date, orders, getGiftsPriceSum()).getEvents();
         this.badge = Badge.getBadgeBySaleSum(getEventsSaleSum());
     }
 
-    public Gifts getGifts() {
+    public List<Gift> getGifts() {
         return gifts;
     }
 
     public int getGiftsPriceSum() {
-        return gifts.getPriceSum();
+        return gifts.stream()
+                .mapToInt(Gift::getPriceSum)
+                .sum();
     }
 
     public Map<Event, Integer> getEvents() {

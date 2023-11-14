@@ -57,7 +57,7 @@ public class PlannerController {
         printPlannerResultStart(date.getDate());
         printOrders(orders.getOrders());
         printOrdersPriceSum(orders.getPriceSum());
-        printGifts(plannerResult.getGifts().getGifts());
+        printGifts(plannerResult.getGifts());
         printEvents(plannerResult.getEvents());
         printEventsSaleSum(plannerResult.getEventsSaleSum());
         printResultPriceSum(orders.getPriceSum() + plannerResult.getGiftsPriceSum() - plannerResult.getEventsSaleSum());

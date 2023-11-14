@@ -4,7 +4,6 @@ import christmas.constant.DayOfWeek;
 import christmas.constant.Event;
 import christmas.constant.MenuCategory;
 import christmas.domain.Date;
-import christmas.domain.Gifts;
 import christmas.domain.Orders;
 
 import java.util.HashMap;
@@ -25,7 +24,7 @@ public class EventsGenerator {
 
     private final Map<Event, Integer> events;
 
-    public EventsGenerator(Date date, Orders orders, Gifts gifts) {
+    public EventsGenerator(Date date, Orders orders, int giftsPriceSum) {
         events = new HashMap<>();
 
         if (orders.getPriceSum() >= MINIMUM_PRICE_SUM_FOR_EVENT) {
@@ -33,7 +32,7 @@ public class EventsGenerator {
             addWeekdayEvent(date, orders);
             addHolidayEvent(date, orders);
             addSpecialEvent(date);
-            addGiftEvent(gifts);
+            addGiftEvent(giftsPriceSum);
         }
     }
 
@@ -94,9 +93,7 @@ public class EventsGenerator {
         return filterCount != 0L;
     }
 
-    private void addGiftEvent(Gifts gifts) {
-        int giftsPriceSum = gifts.getPriceSum();
-
+    private void addGiftEvent(int giftsPriceSum) {
         if (giftsPriceSum != 0) {
             addEvent(Event.GIFT, giftsPriceSum);
         }
