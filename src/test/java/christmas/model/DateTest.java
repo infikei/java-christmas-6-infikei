@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DateTest {
+class DateTest {
     @Test
     void 날짜가_0인_경우_예외_발생() {
         assertThatThrownBy(() -> new Date(0))
