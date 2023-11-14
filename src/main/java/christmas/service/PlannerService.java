@@ -41,8 +41,7 @@ public class PlannerService {
     }
 
     private void generateBadge() {
-        int salePriceSum = getEventsSalePriceSum();
-        badge = Badge.getBadgeByPrice(salePriceSum);
+        badge = Badge.getBadgeByPrice(getEventsSalePriceSum());
     }
 
     public int getDate() {
