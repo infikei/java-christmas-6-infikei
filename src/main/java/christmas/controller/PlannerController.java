@@ -1,10 +1,18 @@
 package christmas.controller;
 
+import christmas.constant.Badge;
+import christmas.constant.Event;
 import christmas.domain.Date;
+import christmas.domain.Gift;
+import christmas.domain.Order;
 import christmas.domain.Orders;
+import christmas.domain.PlannerResult;
 import christmas.service.PlannerService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+
+import java.util.List;
+import java.util.Map;
 
 public class PlannerController {
     private final InputView inputView;
@@ -18,15 +26,11 @@ public class PlannerController {
     }
 
     public void start() {
-        generatePlanner();
-        generatePlannerResult();
-        printPlannerResult();
-    }
-
-    private void generatePlanner() {
         outputView.printPlannerStart();
-        plannerService.saveDate(readDate());
-        plannerService.saveOrders(readOrders());
+        Date date = readDate();
+        Orders orders = readOrders();
+        PlannerResult plannerResult = plannerService.generatePlannerResult(date, orders);
+        printPlannerResult(date, orders, plannerResult);
     }
 
     private Date readDate() {
@@ -49,58 +53,54 @@ public class PlannerController {
         }
     }
 
-    private void generatePlannerResult() {
-        plannerService.generatePlannerResult();
+    private void printPlannerResult(Date date, Orders orders, PlannerResult plannerResult) {
+        printPlannerResultStart(date.getDate());
+        printOrders(orders.getOrders());
+        printOrdersPriceSum(orders.getPriceSum());
+        printGifts(plannerResult.getGifts().getGifts());
+        printEvents(plannerResult.getEvents());
+        printEventsSaleSum(plannerResult.getEventsSaleSum());
+        printResultPriceSum(orders.getPriceSum() + plannerResult.getGiftsPriceSum() - plannerResult.getEventsSaleSum());
+        printBadge(plannerResult.getBadge());
     }
 
-    private void printPlannerResult() {
-        printPlannerResultStart();
-        printOrders();
-        printOrdersPriceSum();
-        printGifts();
-        printEvents();
-        printEventsSaleSum();
-        printResultPriceSum();
-        printBadge();
-    }
-
-    private void printPlannerResultStart() {
-        outputView.printPlannerResultStart(plannerService.getDate());
+    private void printPlannerResultStart(int date) {
+        outputView.printPlannerResultStart(date);
         outputView.printEmptyLine();
     }
 
-    private void printOrders() {
-        outputView.printOrders(plannerService.getOrders());
+    private void printOrders(List<Order> orders) {
+        outputView.printOrders(orders);
         outputView.printEmptyLine();
     }
 
-    private void printOrdersPriceSum() {
-        outputView.printOrdersPriceSum(plannerService.getOrdersPriceSum());
+    private void printOrdersPriceSum(int ordersPriceSum) {
+        outputView.printOrdersPriceSum(ordersPriceSum);
         outputView.printEmptyLine();
     }
 
-    private void printGifts() {
-        outputView.printGifts(plannerService.getGifts());
+    private void printGifts(List<Gift> gifts) {
+        outputView.printGifts(gifts);
         outputView.printEmptyLine();
     }
 
-    private void printEvents() {
-        outputView.printEvents(plannerService.getEvents());
+    private void printEvents(Map<Event, Integer> events) {
+        outputView.printEvents(events);
         outputView.printEmptyLine();
     }
 
-    private void printEventsSaleSum() {
-        outputView.printEventsSaleSum(plannerService.getEventsSaleSum());
+    private void printEventsSaleSum(int eventsSaleSum) {
+        outputView.printEventsSaleSum(eventsSaleSum);
         outputView.printEmptyLine();
     }
 
-    private void printResultPriceSum() {
-        outputView.printResultPriceSum(plannerService.getResultPriceSum());
+    private void printResultPriceSum(int resultPriceSum) {
+        outputView.printResultPriceSum(resultPriceSum);
         outputView.printEmptyLine();
     }
 
-    private void printBadge() {
-        outputView.printBadge(plannerService.getBadge());
+    private void printBadge(Badge badge) {
+        outputView.printBadge(badge);
         outputView.printEmptyLine();
     }
 }
