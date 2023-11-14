@@ -17,6 +17,8 @@ public class OutputView {
     private static final String EVENT_FORMAT = "%s: %,d원";
     private static final String SALE_SUM_START = "<총혜택 금액>";
     private static final String SALE_SUM_FORMAT = "%,d원";
+    private static final String RESULT_PRICE_SUM_START = "<할인 후 예상 결제 금액>";
+    private static final String RESULT_PRICE_SUM_FORMAT = "%,d원";
     private static final String NONE = "없음";
 
     public void printPlannerStart() {
@@ -69,6 +71,11 @@ public class OutputView {
     public void printEventsSaleSum(int saleSum) {
         System.out.println(SALE_SUM_START);
         System.out.println(String.format(SALE_SUM_FORMAT, -1 * saleSum));
+    }
+
+    public void printResultPriceSum(int resultPriceSum) {
+        System.out.println(RESULT_PRICE_SUM_START);
+        System.out.println(String.format(RESULT_PRICE_SUM_FORMAT, resultPriceSum));
     }
 
     private void printNone() {
