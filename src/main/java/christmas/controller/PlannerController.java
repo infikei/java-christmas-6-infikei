@@ -54,6 +54,45 @@ public class PlannerController {
     }
 
     private void printPlannerResult() {
-        //
+        printPlannerResultStart();
+        printOrders();
+        printOrdersPriceSum();
+        printGifts();
+        printEvents();
+        printEventsSaleSum();
+        printResultPriceSum();
+        printBadge();
+    }
+
+    private void printPlannerResultStart() {
+        outputView.printPlannerResultStart(plannerService.getDate());
+    }
+
+    private void printOrders() {
+        outputView.printOrders(plannerService.getOrders());
+    }
+
+    private void printOrdersPriceSum() {
+        outputView.printOrdersPriceSum(plannerService.getOrdersPriceSum());
+    }
+
+    private void printGifts() {
+        outputView.printGifts(plannerService.getGifts());
+    }
+
+    private void printEvents() {
+        outputView.printEvents(plannerService.getEvents());
+    }
+
+    private void printEventsSaleSum() {
+        outputView.printEventsSaleSum(plannerService.getEventsSaleSum());
+    }
+
+    private void printResultPriceSum() {
+        outputView.printResultPriceSum(plannerService.getResultPriceSum());
+    }
+
+    private void printBadge() {
+        outputView.printBadge(plannerService.getBadge());
     }
 }
