@@ -7,7 +7,6 @@ import christmas.domain.Gift;
 import christmas.domain.Order;
 import christmas.domain.Orders;
 import christmas.domain.PlannerResult;
-import christmas.service.PlannerService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -17,19 +16,17 @@ import java.util.Map;
 public class PlannerController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final PlannerService plannerService;
 
     public PlannerController() {
         inputView = new InputView();
         outputView = new OutputView();
-        plannerService = new PlannerService();
     }
 
     public void start() {
         outputView.printPlannerStart();
         Date date = readDate();
         Orders orders = readOrders();
-        PlannerResult plannerResult = plannerService.generatePlannerResult(date, orders);
+        PlannerResult plannerResult = new PlannerResult(date, orders);
         printPlannerResult(date, orders, plannerResult);
     }
 
