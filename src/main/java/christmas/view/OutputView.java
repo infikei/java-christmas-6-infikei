@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.constant.Badge;
 import christmas.constant.Event;
 import christmas.model.Order;
 
@@ -19,6 +20,7 @@ public class OutputView {
     private static final String SALE_SUM_FORMAT = "%,d원";
     private static final String RESULT_PRICE_SUM_START = "<할인 후 예상 결제 금액>";
     private static final String RESULT_PRICE_SUM_FORMAT = "%,d원";
+    private static final String BADGE_START = "<12월 이벤트 배지>";
     private static final String NONE = "없음";
 
     public void printPlannerStart() {
@@ -76,6 +78,11 @@ public class OutputView {
     public void printResultPriceSum(int resultPriceSum) {
         System.out.println(RESULT_PRICE_SUM_START);
         System.out.println(String.format(RESULT_PRICE_SUM_FORMAT, resultPriceSum));
+    }
+
+    public void printBadge(Badge badge) {
+        System.out.println(BADGE_START);
+        System.out.println(badge);
     }
 
     private void printNone() {

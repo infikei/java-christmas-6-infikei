@@ -14,6 +14,11 @@ public enum Badge {
         this.saleSumMinimum = saleSumMinimum;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public String getName() {
         return name;
     }
