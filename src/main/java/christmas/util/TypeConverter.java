@@ -21,7 +21,7 @@ public class TypeConverter {
         return new ArrayList<>(Arrays.asList(values.split(String.valueOf(separator))));
     }
 
-    public static List<List<String>> splitExactlyDouble(String values, char separator, char innerSeparator) {
+    public static List<List<String>> splitExactlyTwice(String values, char separator, char innerSeparator) {
         List<List<String>> valuesConverted = new ArrayList<>();
 
         for (String value : splitExactly(values, separator)) {
@@ -44,7 +44,7 @@ public class TypeConverter {
     }
 
     public static Map<String, String> toMap(String pairs, char separator, char innerSeparator) {
-        return toMap(splitExactlyDouble(pairs, separator, innerSeparator));
+        return toMap(splitExactlyTwice(pairs, separator, innerSeparator));
     }
 
     public static Map<String, String> toMap(List<List<String>> pairs) {
