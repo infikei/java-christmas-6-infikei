@@ -41,9 +41,47 @@ public class PlannerService {
     }
 
     private void generateBadge() {
-        int salePriceSum = events.values().stream()
+        int salePriceSum = getEventsSalePriceSum();
+        badge = Badge.getBadgeByPrice(salePriceSum);
+    }
+
+    public int getDate() {
+        return date.getDate();
+    }
+
+    public List<Order> getOrders() {
+        return orders.getOrders();
+    }
+
+    public List<Order> getGifts() {
+        return gifts;
+    }
+
+    public Map<Event, Integer> getEvents() {
+        return events;
+    }
+
+    public Badge getBadge() {
+        return badge;
+    }
+
+    public int getOrdersPriceSum() {
+        return orders.getPriceSum();
+    }
+
+    public int getGiftsPriceSum() {
+        return gifts.stream()
+                .mapToInt(Order::getPriceSum)
+                .sum();
+    }
+
+    public int getEventsSalePriceSum() {
+        return events.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
-        badge = Badge.getBadgeByPrice(salePriceSum);
+    }
+
+    public int getResultPriceSum() {
+        return getOrdersPriceSum() + getGiftsPriceSum() - getEventsSalePriceSum();
     }
 }
