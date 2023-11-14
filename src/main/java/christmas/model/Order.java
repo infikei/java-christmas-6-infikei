@@ -5,6 +5,8 @@ import christmas.constant.Menu;
 import christmas.constant.MenuCategory;
 
 public class Order {
+    private static final String TO_STRING_FORMAT = "%s %d개";
+
     private static final int COUNT_MINIMUM = 1;
 
     private final Menu menu;
@@ -50,5 +52,10 @@ public class Order {
 
     public int getPriceSum() {
         return menu.getPrice() * count;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(TO_STRING_FORMAT, menu.getName(), count);
     }
 }
