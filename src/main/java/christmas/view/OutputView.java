@@ -89,6 +89,10 @@ public class OutputView {
         System.out.println(NONE);
     }
 
+    public void printEmptyLine() {
+        System.out.println();
+    }
+
     public void printExceptionMessage(String message) {
         System.out.println(message);
     }
