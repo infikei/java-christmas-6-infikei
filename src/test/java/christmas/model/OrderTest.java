@@ -1,6 +1,7 @@
 package christmas.model;
 
 import christmas.constant.Menu;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,55 +29,65 @@ class OrderTest {
         assertThat(new Order(name, count).getPriceSum()).isEqualTo(expected);
     }
 
+    @DisplayName("주문 메뉴가 빈 문자열인 경우 예외 발생")
     @Test
-    void 주문_메뉴가_빈_문자열인_경우_예외_발생() {
+    void createOrderByEmptyString() {
         createOrderAssertThatThrownBy("", 2);
     }
 
+    @DisplayName("주문 메뉴가 없는 메뉴인 경우 예외 발생")
     @Test
-    void 주문_메뉴가_없는_메뉴인_경우_예외_발생() {
+    void createOrderByNotMenu() {
         createOrderAssertThatThrownBy("우테코식당에서가장맛있는메뉴", 2);
     }
 
+    @DisplayName("주문 메뉴가 양송이수프인 경우 메뉴 확인")
     @Test
-    void 주문_메뉴가_양송이수프인_경우_메뉴_확인() {
+    void createOrderByMushroomSoup() {
         getMenuAssertThat("양송이수프", Menu.MUSHROOM_SOUP);
         getMenuNameAssertThat("양송이수프", "양송이수프");
     }
 
+    @DisplayName("주문 메뉴가 바비큐립인 경우 메뉴 확인")
     @Test
-    void 주문_메뉴가_바비큐립인_경우_메뉴_확인() {
+    void createOrderByBBQRibs() {
         getMenuAssertThat("바비큐립", Menu.BBQ_RIBS);
         getMenuNameAssertThat("바비큐립", "바비큐립");
     }
 
+    @DisplayName("주문 개수가 0인 경우 예외 발생")
     @Test
-    void 주문_개수가_0인_경우_예외_발생() {
+    void createOrderByCountZero() {
         createOrderAssertThatThrownBy("양송이수프", 0);
     }
 
+    @DisplayName("주문 개수가 음수인 경우 예외 발생")
     @Test
-    void 주문_개수가_음수인_경우_예외_발생() {
+    void createOrderByCountNegativeInteger() {
         createOrderAssertThatThrownBy("양송이수프", -1);
     }
 
+    @DisplayName("주문 개수가 1인 경우 개수 확인")
     @Test
-    void 주문_개수가_1인_경우_개수_확인() {
+    void createOrderByCountOne() {
         getCountAssertThat(1, 1);
     }
 
+    @DisplayName("주문 개수가 2인 경우 개수 확인")
     @Test
-    void 주문_개수가_2인_경우_개수_확인() {
+    void createOrderByCountTwo() {
         getCountAssertThat(2, 2);
     }
 
+    @DisplayName("주문 메뉴가 타파스이고 개수가 2인 경우 가격 확인")
     @Test
-    void 주문_메뉴가_타파스이고_개수가_2인_경우_가격_확인() {
+    void getPriceSumByTwoTapas() {
         getPriceSumAssertThat("타파스", 2, 11_000);
     }
 
+    @DisplayName("주문 메뉴가 해산물파스타이고 개수가 4인 경우 가격 확인")
     @Test
-    void 주문_메뉴가_해산물파스타이고_개수가_4인_경우_가격_확인() {
+    void getPriceSumByFourSeafoodPasta() {
         getPriceSumAssertThat("해산물파스타", 4, 140_000);
     }
 }

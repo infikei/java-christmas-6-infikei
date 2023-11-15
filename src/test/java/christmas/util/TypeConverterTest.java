@@ -1,11 +1,12 @@
 package christmas.util;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class TypeConverterTest {
+class TypeConverterTest {
     private void toIntegerAssertThatThrownBy(String number) {
         assertThatThrownBy(() -> TypeConverter.toInteger(number))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -15,6 +16,7 @@ public class TypeConverterTest {
         assertThat(TypeConverter.toInteger(number)).isEqualTo(expected);
     }
 
+    @DisplayName("toInteger 기능 결과 확인")
     @Test
     void toIntegerTest() {
         toIntegerAssertThat("1", 1);
@@ -24,8 +26,10 @@ public class TypeConverterTest {
         toIntegerAssertThat("0", 0);
         toIntegerAssertThat("-0", 0);
         toIntegerAssertThat("+0", 0);
+        toIntegerAssertThat("27", 27);
     }
 
+    @DisplayName("toInteger 기능 예외 발생")
     @Test
     void toIntegerThrowExceptionTest() {
         toIntegerAssertThatThrownBy("");
@@ -39,8 +43,22 @@ public class TypeConverterTest {
         toIntegerAssertThatThrownBy("1     ");
         toIntegerAssertThatThrownBy("  1  ");
         toIntegerAssertThatThrownBy("1 2");
+        toIntegerAssertThatThrownBy("+");
+        toIntegerAssertThatThrownBy("-");
+        toIntegerAssertThatThrownBy("*");
+        toIntegerAssertThatThrownBy("/");
+        toIntegerAssertThatThrownBy("*1");
+        toIntegerAssertThatThrownBy("1+1");
+        toIntegerAssertThatThrownBy("1-1");
+        toIntegerAssertThatThrownBy("1*1");
+        toIntegerAssertThatThrownBy("1/1");
+        toIntegerAssertThatThrownBy("++1");
+        toIntegerAssertThatThrownBy("+-1");
+        toIntegerAssertThatThrownBy("-+1");
+        toIntegerAssertThatThrownBy("--1");
     }
 
+    @DisplayName("splitExactly 기능 결과 확인")
     @Test
     void splitExactlyTest() {
         assertThat(TypeConverter.splitExactly("a,b,c", ','))
@@ -51,6 +69,7 @@ public class TypeConverterTest {
                 .containsExactly("010", "123", "456");
     }
 
+    @DisplayName("splitExactly 기능 예외 발생")
     @Test
     void splitExactlyThrowExceptionTest() {
         assertThatThrownBy(() -> TypeConverter.splitExactly("", ','))
@@ -66,6 +85,7 @@ public class TypeConverterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("toMapOfIntegerValue 기능 결과 확인")
     @Test
     void toMapOfIntegerValueTest() {
         assertThat(TypeConverter.toMapOfIntegerValue("abc-1,def-3,ghi-2", ',', '-'))
@@ -79,6 +99,7 @@ public class TypeConverterTest {
                 .containsValues(0);
     }
 
+    @DisplayName("toMapOfIntegerValue 기능 예외 발생")
     @Test
     void toMapOfIntegerValueThrowExceptionTest() {
         toMapOfIntegerValueAssertThatThrownBy("abc-1,def-3,", ',', '-');
