@@ -12,7 +12,7 @@ public class PlannerResult {
     private final Badge badge;
 
     public PlannerResult(Date date, Orders orders) {
-        this.gifts = new GiftsGenerator(orders).getGifts();
+        this.gifts = new GiftsGenerator(orders.getPriceSum()).getGifts();
         this.events = new EventsGenerator(date, orders, getGiftsPriceSum()).getEvents();
         this.badge = Badge.getBadgeBySaleSum(getEventsSaleSum());
     }

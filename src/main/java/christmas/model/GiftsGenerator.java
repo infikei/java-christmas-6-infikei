@@ -12,16 +12,16 @@ public class GiftsGenerator {
 
     private final List<Gift> gifts;
 
-    public GiftsGenerator(Orders orders) {
+    public GiftsGenerator(int priceSum) {
         gifts = new ArrayList<>();
 
-        if (orders.getPriceSum() >= MINIMUM_PRICE_SUM_FOR_EVENT) {
-            addChampagneGift(orders);
+        if (priceSum >= MINIMUM_PRICE_SUM_FOR_EVENT) {
+            addChampagneGift(priceSum);
         }
     }
 
-    private void addChampagneGift(Orders orders) {
-        if (orders.getPriceSum() >= MINIMUM_PRICE_SUM_FOR_CHAMPAGNE) {
+    private void addChampagneGift(int priceSum) {
+        if (priceSum >= MINIMUM_PRICE_SUM_FOR_CHAMPAGNE) {
             addGift(Menu.CHAMPAGNE, CHAMPAGNE_ADD_COUNT);
         }
     }
