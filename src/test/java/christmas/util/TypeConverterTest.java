@@ -6,6 +6,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TypeConverterTest {
+    private void toIntegerAssertThatThrownBy(String number) {
+        assertThatThrownBy(() -> TypeConverter.toInteger(number))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private void toIntegerAssertThat(String number, int expected) {
+        assertThat(TypeConverter.toInteger(number)).isEqualTo(expected);
+    }
+
     @Test
     void toIntegerTest() {
         toIntegerAssertThat("1", 1);
@@ -15,10 +24,6 @@ public class TypeConverterTest {
         toIntegerAssertThat("0", 0);
         toIntegerAssertThat("-0", 0);
         toIntegerAssertThat("+0", 0);
-    }
-
-    private void toIntegerAssertThat(String number, int expected) {
-        assertThat(TypeConverter.toInteger(number)).isEqualTo(expected);
     }
 
     @Test
@@ -34,11 +39,6 @@ public class TypeConverterTest {
         toIntegerAssertThatThrownBy("1     ");
         toIntegerAssertThatThrownBy("  1  ");
         toIntegerAssertThatThrownBy("1 2");
-    }
-
-    private void toIntegerAssertThatThrownBy(String number) {
-        assertThatThrownBy(() -> TypeConverter.toInteger(number))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -58,6 +58,11 @@ public class TypeConverterTest {
         assertThatThrownBy(() -> TypeConverter.splitExactly("a,b,c,", ','))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> TypeConverter.splitExactly(",a,b,c,", ','))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private void toMapOfIntegerValueAssertThatThrownBy(String values, char separator, char innerSeparator) {
+        assertThatThrownBy(() -> TypeConverter.toMapOfIntegerValue(values, separator, innerSeparator))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -90,10 +95,5 @@ public class TypeConverterTest {
         toMapOfIntegerValueAssertThatThrownBy("a", ',', '-');
         toMapOfIntegerValueAssertThatThrownBy("1", ',', '-');
         toMapOfIntegerValueAssertThatThrownBy("0", ',', '-');
-    }
-
-    private void toMapOfIntegerValueAssertThatThrownBy(String values, char separator, char innerSeparator) {
-        assertThatThrownBy(() -> TypeConverter.toMapOfIntegerValue(values, separator, innerSeparator))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 }
