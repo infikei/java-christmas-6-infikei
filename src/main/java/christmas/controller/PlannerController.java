@@ -56,7 +56,7 @@ public class PlannerController {
     }
 
     private void printResult(Date date, Orders orders, PlannerResult result) {
-        printPlannerResultStart(date);
+        printResultStart(date);
         printOrders(orders);
         printOrdersPriceSum(orders);
         printGifts(result);
@@ -66,7 +66,7 @@ public class PlannerController {
         printBadge(result);
     }
 
-    private void printPlannerResultStart(Date date) {
+    private void printResultStart(Date date) {
         outputView.printPlannerResultStart(date.getDate());
         outputView.printEmptyLine();
     }
