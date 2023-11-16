@@ -1,10 +1,12 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.constant.ExceptionType;
 import christmas.util.TypeConverter;
 
 import java.util.Map;
+
+import static christmas.constant.ExceptionType.INVALID_DATE;
+import static christmas.constant.ExceptionType.INVALID_ORDERS;
 
 public class InputView {
     private static final String INPUT_DATE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
@@ -16,17 +18,17 @@ public class InputView {
         try {
             return TypeConverter.toInteger(Console.readLine());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ExceptionType.INVALID_DATE.getMessage());
+            throw new IllegalArgumentException(INVALID_DATE.getMessage());
         }
     }
 
-    public Map<String, Integer> readOrders() {
+    public Map<String, Integer> readOrderMenus() {
         System.out.println(INPUT_ORDERS);
 
         try {
             return TypeConverter.toMapOfIntegerValue(Console.readLine(), ',', '-');
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(ExceptionType.INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
         }
     }
 }

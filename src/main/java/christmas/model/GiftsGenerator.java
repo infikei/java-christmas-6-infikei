@@ -5,32 +5,38 @@ import christmas.constant.Menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import static christmas.constant.Menu.CHAMPAGNE;
+
 public class GiftsGenerator {
-    private static final int MINIMUM_PRICE_SUM_FOR_EVENT = 10_000;
-    private static final int MINIMUM_PRICE_SUM_FOR_CHAMPAGNE = 120_000;
+    private static final int MINIMUM_AMOUNT = 10_000;
+    private static final int MINIMUM_AMOUNT_FOR_CHAMPAGNE = 120_000;
     private static final int CHAMPAGNE_ADD_COUNT = 1;
 
-    private final List<Gift> gifts;
+    private final List<GiftMenu> giftMenus;
 
-    public GiftsGenerator(int priceSum) {
-        gifts = new ArrayList<>();
+    public static List<GiftMenu> generate(int giftMenusAmount) {
+        return new GiftsGenerator(giftMenusAmount).getGiftMenus();
+    }
 
-        if (priceSum >= MINIMUM_PRICE_SUM_FOR_EVENT) {
-            addChampagneGift(priceSum);
+    private GiftsGenerator(int giftMenusAmount) {
+        giftMenus = new ArrayList<>();
+
+        if (giftMenusAmount >= MINIMUM_AMOUNT) {
+            addChampagneGift(giftMenusAmount);
         }
     }
 
-    private void addChampagneGift(int priceSum) {
-        if (priceSum >= MINIMUM_PRICE_SUM_FOR_CHAMPAGNE) {
-            addGift(Menu.CHAMPAGNE, CHAMPAGNE_ADD_COUNT);
+    private void addChampagneGift(int giftMenusAmount) {
+        if (giftMenusAmount >= MINIMUM_AMOUNT_FOR_CHAMPAGNE) {
+            addGiftMenu(CHAMPAGNE, CHAMPAGNE_ADD_COUNT);
         }
     }
 
-    private void addGift(Menu menu, int count) {
-        gifts.add(new Gift(menu, count));
+    private void addGiftMenu(Menu menu, int count) {
+        giftMenus.add(new GiftMenu(menu, count));
     }
 
-    public List<Gift> getGifts() {
-        return gifts;
+    private List<GiftMenu> getGiftMenus() {
+        return giftMenus;
     }
 }

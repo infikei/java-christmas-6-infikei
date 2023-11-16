@@ -1,37 +1,37 @@
 package christmas.model;
 
 import christmas.constant.Badge;
-import christmas.constant.Event;
+import christmas.constant.EventType;
 
 import java.util.List;
 import java.util.Map;
 
 public class PlannerResult {
-    private final List<Gift> gifts;
-    private final Map<Event, Integer> events;
+    private final List<GiftMenu> giftMenus;
+    private final Map<EventType, Integer> events;
     private final Badge badge;
 
-    public PlannerResult(Date date, Orders orders) {
-        this.gifts = new GiftsGenerator(orders.getPriceSum()).getGifts();
-        this.events = new EventsGenerator(date, orders, getGiftsPriceSum()).getEvents();
-        this.badge = Badge.getBadgeBySaleSum(getEventsSaleSum());
+    public PlannerResult(Date date, OrderMenus orderMenus) {
+        this.giftMenus = GiftsGenerator.generate(orderMenus.getAmount());
+        this.events = EventsGenerator.generate(date, orderMenus, getGiftsAmount());
+        this.badge = Badge.saleSumOf(getEventsDiscount());
     }
 
-    public List<Gift> getGifts() {
-        return gifts;
+    public List<GiftMenu> getGiftMenus() {
+        return giftMenus;
     }
 
-    public int getGiftsPriceSum() {
-        return gifts.stream()
-                .mapToInt(Gift::getPriceSum)
+    public int getGiftsAmount() {
+        return giftMenus.stream()
+                .mapToInt(GiftMenu::getAmount)
                 .sum();
     }
 
-    public Map<Event, Integer> getEvents() {
+    public Map<EventType, Integer> getEvents() {
         return events;
     }
 
-    public int getEventsSaleSum() {
+    public int getEventsDiscount() {
         return events.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();

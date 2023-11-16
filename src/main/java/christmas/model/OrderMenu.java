@@ -1,27 +1,29 @@
 package christmas.model;
 
-import christmas.constant.ExceptionType;
 import christmas.constant.Menu;
+import christmas.constant.MenuCategory;
 
-public class Order {
+import static christmas.constant.ExceptionType.INVALID_ORDERS;
+
+public class OrderMenu {
     private static final String TO_STRING_FORMAT = "%s %d개";
 
-    private static final int COUNT_MINIMUM = 1;
+    private static final int MINIMUM_COUNT = 1;
 
     private final Menu menu;
     private final int count;
 
-    public Order(String name, int count) {
-        this.menu = convertMenu(name);
+    public OrderMenu(String name, int count) {
+        this.menu = toMenu(name);
         validateCount(count);
         this.count = count;
     }
 
-    private Menu convertMenu(String name) {
+    private Menu toMenu(String name) {
         try {
             return Menu.nameOf(name);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(ExceptionType.INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
         }
     }
 
@@ -31,12 +33,12 @@ public class Order {
 
     private void validateIsCountInRange(int count) {
         if (!isCountInRange(count)) {
-            throw new IllegalArgumentException(ExceptionType.INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
         }
     }
 
     private boolean isCountInRange(int count) {
-        return count >= COUNT_MINIMUM;
+        return count >= MINIMUM_COUNT;
     }
 
     @Override
@@ -48,11 +50,15 @@ public class Order {
         return menu;
     }
 
+    public MenuCategory getCategory() {
+        return menu.getCategory();
+    }
+
     public int getCount() {
         return count;
     }
 
-    public int getPriceSum() {
+    public int getAmount() {
         return menu.getPrice() * count;
     }
 }

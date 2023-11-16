@@ -1,17 +1,18 @@
 package christmas.model;
 
-import christmas.constant.ExceptionType;
 import christmas.constant.Menu;
 
-public class Gift {
+import static christmas.constant.ExceptionType.INVALID_ORDERS;
+
+public class GiftMenu {
     private static final String TO_STRING_FORMAT = "%s %d개";
 
-    private static final int COUNT_MINIMUM = 1;
+    private static final int MINIMUM_COUNT = 1;
 
     private final Menu menu;
     private final int count;
 
-    public Gift(Menu menu, int count) {
+    public GiftMenu(Menu menu, int count) {
         this.menu = menu;
         validateCount(count);
         this.count = count;
@@ -23,12 +24,12 @@ public class Gift {
 
     private void validateIsCountInRange(int count) {
         if (!isCountInRange(count)) {
-            throw new IllegalArgumentException(ExceptionType.INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
         }
     }
 
     private boolean isCountInRange(int count) {
-        return count >= COUNT_MINIMUM;
+        return count >= MINIMUM_COUNT;
     }
 
     public Menu getMenu() {
@@ -39,7 +40,7 @@ public class Gift {
         return count;
     }
 
-    public int getPriceSum() {
+    public int getAmount() {
         return menu.getPrice() * count;
     }
 

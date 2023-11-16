@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import christmas.model.Date;
-import christmas.model.Orders;
+import christmas.model.OrderMenus;
 import christmas.model.PlannerResult;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -18,8 +18,8 @@ public class PlannerController {
     public void start() {
         printStart();
         Date date = readDate();
-        Orders orders = readOrders();
-        generateAndPrintResult(date, orders);
+        OrderMenus orderMenus = readOrderMenus();
+        generateAndPrintResult(date, orderMenus);
     }
 
     private void printStart() {
@@ -36,33 +36,33 @@ public class PlannerController {
         }
     }
 
-    private Orders readOrders() {
+    private OrderMenus readOrderMenus() {
         while (true) {
             try {
-                return new Orders(inputView.readOrders());
+                return new OrderMenus(inputView.readOrderMenus());
             } catch (IllegalArgumentException e) {
                 outputView.printExceptionMessage(e.getMessage());
             }
         }
     }
 
-    private void generateAndPrintResult(Date date, Orders orders) {
-        PlannerResult result = generateResult(date, orders);
-        printResult(date, orders, result);
+    private void generateAndPrintResult(Date date, OrderMenus orderMenus) {
+        PlannerResult result = generateResult(date, orderMenus);
+        printResult(date, orderMenus, result);
     }
 
-    private PlannerResult generateResult(Date date, Orders orders) {
-        return new PlannerResult(date, orders);
+    private PlannerResult generateResult(Date date, OrderMenus orderMenus) {
+        return new PlannerResult(date, orderMenus);
     }
 
-    private void printResult(Date date, Orders orders, PlannerResult result) {
+    private void printResult(Date date, OrderMenus orderMenus, PlannerResult result) {
         printResultStart(date);
-        printOrders(orders);
-        printOrdersPriceSum(orders);
-        printGifts(result);
+        printOrderMenus(orderMenus);
+        printOrderMenusAmount(orderMenus);
+        printGiftMenus(result);
         printEvents(result);
-        printEventsSaleSum(result);
-        printResultPriceSum(orders, result);
+        printEventsDiscount(result);
+        printResultAmount(orderMenus, result);
         printBadge(result);
     }
 
@@ -71,18 +71,18 @@ public class PlannerController {
         outputView.printEmptyLine();
     }
 
-    private void printOrders(Orders orders) {
-        outputView.printOrders(orders.getOrders());
+    private void printOrderMenus(OrderMenus orderMenus) {
+        outputView.printOrderMenus(orderMenus.getOrderMenus());
         outputView.printEmptyLine();
     }
 
-    private void printOrdersPriceSum(Orders orders) {
-        outputView.printOrdersPriceSum(orders.getPriceSum());
+    private void printOrderMenusAmount(OrderMenus orderMenus) {
+        outputView.printOrderMenusAmount(orderMenus.getAmount());
         outputView.printEmptyLine();
     }
 
-    private void printGifts(PlannerResult result) {
-        outputView.printGifts(result.getGifts());
+    private void printGiftMenus(PlannerResult result) {
+        outputView.printGiftMenus(result.getGiftMenus());
         outputView.printEmptyLine();
     }
 
@@ -91,14 +91,14 @@ public class PlannerController {
         outputView.printEmptyLine();
     }
 
-    private void printEventsSaleSum(PlannerResult result) {
-        outputView.printEventsSaleSum(result.getEventsSaleSum());
+    private void printEventsDiscount(PlannerResult result) {
+        outputView.printTotalDiscount(result.getEventsDiscount());
         outputView.printEmptyLine();
     }
 
-    private void printResultPriceSum(Orders orders, PlannerResult result) {
-        int resultPriceSum = orders.getPriceSum() + result.getGiftsPriceSum() - result.getEventsSaleSum();
-        outputView.printResultPriceSum(resultPriceSum);
+    private void printResultAmount(OrderMenus orderMenus, PlannerResult result) {
+        int resultAmount = orderMenus.getAmount() + result.getGiftsAmount() - result.getEventsDiscount();
+        outputView.printResultAmount(resultAmount);
         outputView.printEmptyLine();
     }
 

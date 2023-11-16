@@ -23,7 +23,7 @@ public enum Badge {
         return name;
     }
 
-    public static Badge getBadgeBySaleSum(int saleSum) {
+    public static Badge saleSumOf(int saleSum) {
         for (Badge badge : values()) {
             if (saleSum >= badge.saleSumMinimum) {
                 return badge;
